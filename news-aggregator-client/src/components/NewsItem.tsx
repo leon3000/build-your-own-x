@@ -1,14 +1,5 @@
 import { ArrowUp } from 'lucide-react'
-
-export type Article = {
-  id: string
-  title: string
-  source: string
-  summary?: string
-  publishedAt?: string
-  url?: string
-  upvotes?: number
-}
+import type { Article } from '../types/article'
 
 type NewsItemProps = {
   article: Article
