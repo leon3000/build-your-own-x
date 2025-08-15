@@ -6,7 +6,7 @@ import type { Article } from './components/NewsItem'
 
 const SOURCES = ['All', 'CNN', 'Fox News', 'BBC', 'The Verge', 'AP']
 
-const SAMPLE_ARTICLES: Article[] = [
+const INITIAL_ARTICLES: Article[] = [
   {
     id: '1',
     title: 'Global Markets Rally as Tech Stocks Lead Gains',
@@ -14,6 +14,7 @@ const SAMPLE_ARTICLES: Article[] = [
     summary: 'Tech giants push indices higher amid positive earnings and cooling inflation data.',
     publishedAt: new Date().toISOString(),
     url: '#',
+    upvotes: 125,
   },
   {
     id: '2',
@@ -22,6 +23,7 @@ const SAMPLE_ARTICLES: Article[] = [
     summary: 'Candidates outline contrasting visions on the economy and national security.',
     publishedAt: new Date().toISOString(),
     url: '#',
+    upvotes: 42,
   },
   {
     id: '3',
@@ -30,6 +32,7 @@ const SAMPLE_ARTICLES: Article[] = [
     summary: 'New materials could enable rapid charging without degrading capacity over time.',
     publishedAt: new Date().toISOString(),
     url: '#',
+    upvotes: 88,
   },
   {
     id: '4',
@@ -38,6 +41,7 @@ const SAMPLE_ARTICLES: Article[] = [
     summary: 'Nations agree on a framework to accelerate emissions reductions this decade.',
     publishedAt: new Date().toISOString(),
     url: '#',
+    upvotes: 63,
   },
   {
     id: '5',
@@ -46,11 +50,17 @@ const SAMPLE_ARTICLES: Article[] = [
     summary: 'Forecast points to steady growth with risks from geopolitical tensions.',
     publishedAt: new Date().toISOString(),
     url: '#',
+    upvotes: 17,
   },
 ]
 
 function App() {
   const [activeSource, setActiveSource] = useState<string>('All')
+  const [articles, setArticles] = useState<Article[]>(INITIAL_ARTICLES)
+
+  const handleUpvote = (id: string) => {
+    setArticles(prev => prev.map(a => a.id === id ? { ...a, upvotes: (a.upvotes ?? 0) + 1 } : a))
+  }
 
   return (
     <div className="min-h-screen bg-[#1a1b26] text-neutral-100 font-mono">
@@ -62,7 +72,7 @@ function App() {
             activeSource={activeSource}
             onSelect={setActiveSource}
           />
-          <NewsFeed articles={SAMPLE_ARTICLES} activeSource={activeSource} />
+          <NewsFeed articles={articles} activeSource={activeSource} onUpvote={handleUpvote} />
         </div>
       </div>
     </div>
