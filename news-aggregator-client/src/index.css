@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles for CLI aesthetic */
+:root {
+  color-scheme: dark;
+}
+
+html {
+  @apply h-full;
+}
+
+body {
+  @apply h-full bg-neutral-900 text-neutral-100 font-mono antialiased;
+}
+
+#root {
+  @apply min-h-screen;
+}
